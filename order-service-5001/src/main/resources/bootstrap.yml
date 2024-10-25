@@ -1,0 +1,38 @@
+server:
+  port: 5001
+
+spring:
+  application:
+    name: order-service
+  #-------------------数据库配置-----------------------
+  datasource:
+    url: jdbc:mysql://localhost:3306/ordermanagementsystem?useSSL=false&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+
+  #-------------------kafka配置-----------------------
+  kafka:
+    bootstrap-servers: localhost:9092
+
+    producer:
+      # key的序列化
+      key-serializer: org.apache.kafka.common.serialization.StringDeserializer
+      # value的序列化
+      value-serializer: org.apache.kafka.common.serialization.StringDeserializer
+
+# mybatis
+mybatis:
+  type-aliases-package: com.zhuwl.springcloud.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+eureka:
+  instance:
+    instance-id: order-service-5001
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8001/eureka/
+

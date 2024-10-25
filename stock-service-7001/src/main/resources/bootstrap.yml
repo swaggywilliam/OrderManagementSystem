@@ -1,0 +1,27 @@
+server:
+  port: 7001
+
+spring:
+  application:
+    name: stock-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/ordermanagementsystem?useSSL=false&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+
+# mybatis
+mybatis:
+  type-aliases-package: com.zhuwl.springcloud.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+eureka:
+  instance:
+    instance-id: stock-service-7001
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8001/eureka/
+

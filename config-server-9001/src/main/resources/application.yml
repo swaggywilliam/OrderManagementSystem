@@ -1,0 +1,22 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: config-server-9001
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/swaggywilliam/OrderManagementSystem.git
+          search-paths: OrderManagementSystem
+
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://127.0.0.1:8001/eureka # 注册中心的地址
+  instance:
+    instance-id: config-server-9001
+
