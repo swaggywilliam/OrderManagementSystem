@@ -29,25 +29,26 @@ public class UserServiceImpl implements UserService {
 //        int i = 1/0; // 超时响应，测试服务降级
 
         // 从Redis中查询
-        User user = (User)redisTemplate.opsForValue().get("user: " + id);
-
-        if (user == null) { // 缓存未命中
-            // 查询数据库
-            user = userDao.getUserById(id);
-            if (user == null) { // 数据库未命中
-                // 防止缓存穿透设计, 将空结果缓存，过期时间3分钟
-                redisTemplate.opsForValue().set("user:" + id, null, 3, TimeUnit.MINUTES);
-                return CommonResult.failed("未找到用户信息。");
-            }
-            // 数据库命中，存入缓存，过期时间1小时
-            redisTemplate.opsForValue().set("user:" + id, user, 1, TimeUnit.HOURS);
+        User cachedUser = (User)redisTemplate.opsForValue().get("user: " + id);
+        if (cachedUser != null) { // 缓存命中
+            return CommonResult.success(cachedUser);
         }
 
-        // 返回结果
-        return CommonResult.success(user);
+        // 从db中查询
+        User dbUser = userDao.getUserById(id);
+        if (dbUser != null) {
+            // 数据库命中，存入缓存，过期时间1小时
+            redisTemplate.opsForValue().set("user:" + id, dbUser, 1, TimeUnit.HOURS);
+            return CommonResult.success(dbUser);
+        } else { // 数据库未命中
+            // 防止缓存穿透设计, 将空结果缓存，过期时间3分钟
+            redisTemplate.opsForValue().set("user:" + id, null, 3, TimeUnit.MINUTES);
+            return CommonResult.failed("未找到用户信息。");
+        }
     }
 
     public CommonResult<User> userService_TimeOutHandler(Long id){
         return CommonResult.failed("查询超时，请稍后重试。");
     }
+
 }

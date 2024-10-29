@@ -22,6 +22,7 @@
         <module>order-service-5001</module>
         <module>user-service-6001</module>
         <module>stock-service-7001</module>
+        <module>product-service-4001</module>
     </modules>
 
     <properties>

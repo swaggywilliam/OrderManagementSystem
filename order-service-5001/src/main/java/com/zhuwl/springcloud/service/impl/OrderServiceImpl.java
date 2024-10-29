@@ -3,20 +3,26 @@ package com.zhuwl.springcloud.service.impl;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.zhuwl.springcloud.dao.OrderDao;
-import com.zhuwl.springcloud.entity.CommonResult;
-import com.zhuwl.springcloud.entity.Order;
-import com.zhuwl.springcloud.entity.User;
+import com.zhuwl.springcloud.dao.OrderItemDao;
+import com.zhuwl.springcloud.entity.*;
 import com.zhuwl.springcloud.feignclients.StockFeignClient;
 import com.zhuwl.springcloud.feignclients.UserFeignClient;
 import com.zhuwl.springcloud.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderDao orderDao;
+
+    @Autowired
+    private OrderItemDao orderItemDao;
 
     @Autowired
     private UserFeignClient userFeignClient;
@@ -34,19 +40,23 @@ public class OrderServiceImpl implements OrderService {
             @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000")
     })
     public CommonResult<Order> getOrderById(Long id) {
-        // service -> dao -> database
+        // 查询Order基本信息
         Order order = orderDao.getOrderById(id);
         if (order == null) {
-            return CommonResult.failed("未查到该订单。");
+            return CommonResult.failed("未查到该订单！");
         }
-        // 调用user-service，返回的是CommonResult<User>
+
+        // 查询User信息，调用user-service，返回的是CommonResult<User>
         CommonResult<User> user_res = userFeignClient.getUserById(order.getUserId());
-        if (user_res.getCode() == 200) {  // 正常响应，将User封装到Order当中
-            order.setUser(user_res.getData());
-            return CommonResult.success(order);
-        } else { // 异常响应
-            return CommonResult.failed("未查到该订单的用户信息。");
+        if (user_res.getCode() != 200) {
+            return CommonResult.failed("未查到用户信息");
         }
+        order.setUser(user_res.getData());
+
+        // 查询订单项
+        List<OrderItem> orderItemsByOrderId = orderItemDao.getOrderItemsByOrderId(id);
+        order.setOrderItems(orderItemsByOrderId);
+        return CommonResult.success(order);
     }
 
     /**
@@ -63,20 +73,37 @@ public class OrderServiceImpl implements OrderService {
      * @param order
      * @return
      */
+    @Transactional
     @Override
     public CommonResult<Long> createOrder(Order order) {
-        // 商品库存减少 CommonResult<Product>
-        Integer code = stockFeignClient.decrementStock(order.getProductId(), order.getProductQuantity()).getCode();
-        if (code != 200) { // 响应码200-成功 500-失败
-            return CommonResult.failed("商品库存不足！");
+        // 创建订单，基本信息的保存
+        orderDao.createOrder(order);
+
+        // 获取order在db中的自增id
+        Long orderId = order.getId();
+
+        BigDecimal totalPrice = BigDecimal.ZERO;
+
+        // 遍历订单项，1. 判断库存是否充足；2. 计算订单总价
+        for (OrderItem item : order.getOrderItems()) {
+            Stock stock = stockFeignClient.getStockById(item.getProductId()).getData();
+            if (item.getQuantity() >= stock.getAvailableQuantity()) {
+                return CommonResult.failed("商品库存不足，订单添加失败。");
+            } else {
+                // 更新商品库存
+                stockFeignClient.updateStockById(item.getProductId(), stock.getAvailableQuantity() - item.getQuantity());
+                // 创建订单项，订单项信息的保存
+                item.setOrderId(orderId);
+                orderItemDao.createOrderItem(item);
+                // 累计订单总价
+                totalPrice = totalPrice.add(item.getProductPrice().multiply(new BigDecimal(item.getQuantity())));
+            }
         }
 
-        // 创建订单
-        Integer responseCode = orderDao.createOrder(order);
-        if (responseCode == 1) { // 创建成功
-            return CommonResult.success(order.getOrderId());
-        } else {
-            return CommonResult.failed("订单创建失败");
-        }
+        // 更新订单总价
+        order.setTotalPrice(totalPrice);
+        orderDao.updateOrder(order);
+
+        return CommonResult.success(orderId);
     }
 }
