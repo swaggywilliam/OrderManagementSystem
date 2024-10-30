@@ -23,6 +23,14 @@ spring:
       # value的序列化，JsonSerializer可以串行化自定义的消息类型
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
+  #-------------------zipkin + sleuth配置-----------------------
+  zipkin:
+    # Zipkin 服务地址
+    base-url: http://localhost:9411/
+  sleuth:
+    sampler:
+      probability: 1.0
+
 # mybatis
 mybatis:
   type-aliases-package: com.zhuwl.springcloud.entity

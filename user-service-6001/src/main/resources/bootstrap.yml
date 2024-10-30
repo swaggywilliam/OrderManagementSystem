@@ -9,6 +9,8 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
+
+  #-------------------redis配置-----------------------
   redis:
     host: localhost
     port: 6379
@@ -20,6 +22,14 @@ spring:
           min-idle: 0
     timeout: 6000ms
     database: 0 # 指定user信息存在0号库
+
+  #-------------------zipkin + sleuth配置-----------------------
+  zipkin:
+    # Zipkin 服务地址
+    base-url: http://localhost:9411/
+  sleuth:
+    sampler:
+      probability: 1.0
 
 # mybatis
 mybatis:

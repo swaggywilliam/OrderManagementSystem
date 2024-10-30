@@ -54,6 +54,12 @@
             <artifactId>spring-kafka</artifactId>
         </dependency>
 
+        <!--sleuth+zipkin-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+
         <!--数据库-->
         <dependency>
             <groupId>mysql</groupId>
