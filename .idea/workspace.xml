@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60d05a4b-725e-476e-9e8b-a46fd40c06a5" name="更改" comment="" />
+    <list default="true" id="60d05a4b-725e-476e-9e8b-a46fd40c06a5" name="更改" comment="1.更改数据结构&#10;2.新增订单功能">
+      <change afterPath="$PROJECT_DIR$/order-service-5001/src/main/java/com/zhuwl/springcloud/config/KafkaConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-service-5001/src/main/java/com/zhuwl/springcloud/message/StockMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product-service-4001/src/main/java/com/zhuwl/springcloud/consumer/KafkaConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service-5001/src/main/java/com/zhuwl/springcloud/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service-5001/src/main/java/com/zhuwl/springcloud/entity/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service-5001/src/main/java/com/zhuwl/springcloud/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service-5001/src/main/java/com/zhuwl/springcloud/service/impl/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service-5001/src/main/resources/bootstrap.yml" beforeDir="false" afterPath="$PROJECT_DIR$/order-service-5001/src/main/resources/bootstrap.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service-4001/src/main/resources/bootstrap.yml" beforeDir="false" afterPath="$PROJECT_DIR$/product-service-4001/src/main/resources/bootstrap.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +23,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="spring-beans.schema" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -27,6 +36,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "swaggywilliam"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/swaggywilliam/OrderManagementSystem.git",
+    "accountId": "9d8eb9d9-e8ea-4bda-9caa-0405228ace9e"
+  }
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -48,53 +69,53 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.eureka-server-8001中的所有.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.OrderManagementSystem [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.OrderManagementSystem [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.eureka-server-8001 [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.eureka-server-8001 [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.order-service-5001 [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.order-service-5001 [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.product-service-4001 [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.product-service-4001 [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.stock-service-7001 [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.stock-service-7001 [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.user-service-6001 [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.user-service-6001 [compile].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ConfigServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.EurekaServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.OrderServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.ProductServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.StockServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.UserServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Program Files/Java/Project/OrderManagementSystem/order-service-5001/src/main/resources/bootstrap.yml&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.3034483&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.eureka-server-8001中的所有.executor": "Run",
+    "Maven.OrderManagementSystem [clean].executor": "Run",
+    "Maven.OrderManagementSystem [compile].executor": "Run",
+    "Maven.eureka-server-8001 [clean].executor": "Run",
+    "Maven.eureka-server-8001 [compile].executor": "Run",
+    "Maven.order-service-5001 [clean].executor": "Run",
+    "Maven.order-service-5001 [compile].executor": "Run",
+    "Maven.product-service-4001 [clean].executor": "Run",
+    "Maven.product-service-4001 [compile].executor": "Run",
+    "Maven.stock-service-7001 [clean].executor": "Run",
+    "Maven.stock-service-7001 [compile].executor": "Run",
+    "Maven.user-service-6001 [clean].executor": "Run",
+    "Maven.user-service-6001 [compile].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.ConfigServerApplication.executor": "Run",
+    "Spring Boot.EurekaServerApplication.executor": "Run",
+    "Spring Boot.OrderServiceApplication.executor": "Run",
+    "Spring Boot.ProductServiceApplication.executor": "Run",
+    "Spring Boot.StockServiceApplication.executor": "Run",
+    "Spring Boot.UserServiceApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Program Files/Java/Project/OrderManagementSystem/order-service-5001/src/main/resources/bootstrap.yml",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.3034483",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -193,9 +214,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.ProductServiceApplication" />
         <item itemvalue="Spring Boot.StockServiceApplication" />
         <item itemvalue="Spring Boot.UserServiceApplication" />
-        <item itemvalue="Spring Boot.ProductServiceApplication" />
         <item itemvalue="Spring Boot.EurekaServerApplication" />
         <item itemvalue="JUnit.eureka-server-8001中的所有" />
       </list>
@@ -225,10 +246,35 @@
       <workItem from="1729845646829" duration="1427000" />
       <workItem from="1730076033579" duration="17624000" />
       <workItem from="1730170079051" duration="9994000" />
+      <workItem from="1730249860823" duration="9435000" />
     </task>
+    <task id="LOCAL-00001" summary="1.更改数据结构&#10;2.新增订单功能">
+      <option name="closed" value="true" />
+      <created>1730191520266</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1730191520266</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1.更改数据结构&#10;2.新增订单功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.更改数据结构&#10;2.新增订单功能" />
   </component>
 </project>

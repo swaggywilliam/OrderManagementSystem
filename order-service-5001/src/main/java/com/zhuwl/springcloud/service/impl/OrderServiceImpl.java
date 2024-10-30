@@ -7,8 +7,10 @@ import com.zhuwl.springcloud.dao.OrderItemDao;
 import com.zhuwl.springcloud.entity.*;
 import com.zhuwl.springcloud.feignclients.StockFeignClient;
 import com.zhuwl.springcloud.feignclients.UserFeignClient;
+import com.zhuwl.springcloud.message.StockMessage;
 import com.zhuwl.springcloud.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +31,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private StockFeignClient stockFeignClient;
+
+    @Autowired
+    private KafkaTemplate<String, StockMessage> kafkaTemplate;
 
     /**
      * 查询订单
@@ -77,6 +82,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public CommonResult<Long> createOrder(Order order) {
         // 创建订单，基本信息的保存
+        order.setStatus(1);
         orderDao.createOrder(order);
 
         // 获取order在db中的自增id
@@ -92,6 +98,15 @@ public class OrderServiceImpl implements OrderService {
             } else {
                 // 更新商品库存
                 stockFeignClient.updateStockById(item.getProductId(), stock.getAvailableQuantity() - item.getQuantity());
+
+                // 发送库存更新通知
+                //   构建消息
+                StockMessage msg = new StockMessage();
+                msg.setProductId(item.getProductId());
+                msg.setStock(stock.getAvailableQuantity() - item.getQuantity());
+                //   发送消息
+                kafkaTemplate.send("stock-updated-topic", msg);
+
                 // 创建订单项，订单项信息的保存
                 item.setOrderId(orderId);
                 orderItemDao.createOrderItem(item);

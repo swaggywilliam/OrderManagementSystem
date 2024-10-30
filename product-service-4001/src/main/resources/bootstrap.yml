@@ -9,6 +9,12 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: stock-upadted # 所属消费者组名称
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
 
 # mybatis
 mybatis:

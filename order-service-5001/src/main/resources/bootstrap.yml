@@ -13,13 +13,15 @@ spring:
 
   #-------------------kafka配置-----------------------
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: localhost:9092 # kafka服务器，集群用逗号隔开
 
     producer:
+      # 重试次数
+      retries: 0
       # key的序列化
-      key-serializer: org.apache.kafka.common.serialization.StringDeserializer
-      # value的序列化
-      value-serializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # value的序列化，JsonSerializer可以串行化自定义的消息类型
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 # mybatis
 mybatis:
