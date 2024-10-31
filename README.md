@@ -20,6 +20,7 @@ user-service: 查询user信息时先查询Redis，没有缓存时再查询数据
 
 ### 6. 消息队列Kafka
 order-service：新增订单后向其他服务发送消息
+
 bus：与bus集成，实现动态刷新Config
 
 ### 7. 注册中心Eureka
