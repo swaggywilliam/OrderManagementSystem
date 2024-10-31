@@ -3,13 +3,29 @@ server:
 
 spring:
   application:
-    name: config-server-9001
+    name: config-center
   cloud:
     config:
       server:
         git:
-          uri: https://github.com/swaggywilliam/OrderManagementSystem.git
-          search-paths: OrderManagementSystem
+          uri: https://gitee.com/swaggywilliam/omsconfig.git
+          username: swaggywilliam
+          password: wszwl1996
+          default-label: master # 分支名称
+          search-paths: OrderManagementSystem # 配置文件所在根目录，因为没建二级目录，就省略不写
+    bus:
+      enabled: true
+      trace:
+        enabled: true
+  kafka:
+    bootstrap-servers: localhost:9092
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh # 暴露刷新的地址为refresh
+
 
 eureka:
   client:
@@ -18,5 +34,5 @@ eureka:
     service-url:
       defaultZone: http://127.0.0.1:8001/eureka # 注册中心的地址
   instance:
-    instance-id: config-server-9001
+    instance-id: config-center-9001
 

@@ -1,35 +1,12 @@
-server:
-  port: 7001
-
 spring:
   application:
     name: stock-service
-  datasource:
-    url: jdbc:mysql://localhost:3306/ordermanagementsystem?useSSL=false&useUnicode=true&characterEncoding=utf8
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
-
-  #-------------------zipkin + sleuth配置-----------------------
-  zipkin:
-    # Zipkin 服务地址
-    base-url: http://localhost:9411/
-  sleuth:
-    sampler:
-      probability: 1.0
-
-# mybatis
-mybatis:
-  type-aliases-package: com.zhuwl.springcloud.entity
-  configuration:
-    map-underscore-to-camel-case: true
-
-eureka:
-  instance:
-    instance-id: stock-service-7001
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://127.0.0.1:8001/eureka/
+  #-------------------SpringCloud Config--------------
+  cloud:
+    config:
+      # /{label}/{name}-{profile}.yml
+      label: master # 分支名称
+      name: stock-service # 配置名称，为了与服务保持一致，对配置文件的命名采用{服务名}-{版本}的形式
+      profile: dev # 版本
+      uri: http://localhost:9001  # 配置中心地址
 
